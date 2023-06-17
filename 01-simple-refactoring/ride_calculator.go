@@ -11,6 +11,8 @@ const (
 	SUNDAY_FARE           = 2.9
 	OVERNIGHT_FARE        = 3.9
 	OVERNIGHT_SUNDAY_FARE = 5
+	OVERNIGHT_START       = 22
+	OVERNIGHT_END         = 6
 )
 
 func CalculateRide(segments []map[string]any) float64 {
@@ -19,7 +21,7 @@ func CalculateRide(segments []map[string]any) float64 {
 		if segment["distance"] != nil && reflect.TypeOf(segment["distance"]).Kind() == reflect.Float64 && segment["distance"].(float64) > 0 {
 			if _, ok := segment["dateTime"].(time.Time); segment["dateTime"] != nil && ok && !segment["dateTime"].(time.Time).IsZero() {
 				// overnight
-				if segment["dateTime"].(time.Time).Hour() >= 22 || segment["dateTime"].(time.Time).Hour() <= 6 {
+				if segment["dateTime"].(time.Time).Hour() >= OVERNIGHT_START || segment["dateTime"].(time.Time).Hour() <= OVERNIGHT_END {
 					// not sunday
 					if segment["dateTime"].(time.Time).Weekday() != 0 {
 						fare = fare + segment["distance"].(float64)*OVERNIGHT_FARE

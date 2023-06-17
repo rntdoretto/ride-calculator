@@ -28,8 +28,7 @@ Código morto
 
 Longa lista de parâmetros ou parâmetros abertos
 
-* introduzindo objetos
-* introduzindo objetos parâmetro
+* introduzindo struct parâmetro
 
 ## 03 - Methods Refactoring
 
@@ -47,6 +46,6 @@ Comentários
 
 * utilizar um tratamento de erros adequado
 
-## Classe grande
+## 06 - Object Oriented Programming 
 
-* mover métodos
+* introduzindo objetos

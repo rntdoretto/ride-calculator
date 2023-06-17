@@ -1,17 +1,17 @@
-package handleerrorsrefactoring_test
+package objectorientedprogramming_test
 
 import (
 	"testing"
 	"time"
 
-	handleerrorsrefactoring "github.com/rntdoretto/ride-calculator/05-handle-errors-refactoring"
+	objectorientedprogramming "github.com/rntdoretto/ride-calculator/06-object-oriented-programming"
 	"github.com/stretchr/testify/assert"
 )
 
 type (
 	input struct {
 		distance float64
-		dateTime time.Time
+		datetime time.Time
 	}
 	testTable struct {
 		name         string
@@ -28,7 +28,7 @@ func TestExecute(t *testing.T) {
 			input: []input{
 				{
 					distance: 2.0,
-					dateTime: time.Date(2023, 6, 17, 10, 0, 0, 0, time.UTC),
+					datetime: time.Date(2023, 6, 17, 10, 0, 0, 0, time.UTC),
 				},
 			},
 			expectedFare: 10.0,
@@ -38,7 +38,7 @@ func TestExecute(t *testing.T) {
 			input: []input{
 				{
 					distance: 10.0,
-					dateTime: time.Date(2023, 6, 17, 10, 0, 0, 0, time.UTC),
+					datetime: time.Date(2023, 6, 17, 10, 0, 0, 0, time.UTC),
 				},
 			},
 			expectedFare: 21.0,
@@ -48,11 +48,11 @@ func TestExecute(t *testing.T) {
 			input: []input{
 				{
 					distance: 10.0,
-					dateTime: time.Date(2023, 6, 17, 10, 0, 0, 0, time.UTC),
+					datetime: time.Date(2023, 6, 17, 10, 0, 0, 0, time.UTC),
 				},
 				{
 					distance: 10.0,
-					dateTime: time.Date(2023, 6, 17, 10, 0, 0, 0, time.UTC),
+					datetime: time.Date(2023, 6, 17, 10, 0, 0, 0, time.UTC),
 				},
 			},
 			expectedFare: 42.0,
@@ -62,7 +62,7 @@ func TestExecute(t *testing.T) {
 			input: []input{
 				{
 					distance: 10.0,
-					dateTime: time.Date(2023, 6, 17, 23, 0, 0, 0, time.UTC),
+					datetime: time.Date(2023, 6, 17, 23, 0, 0, 0, time.UTC),
 				},
 			},
 			expectedFare: 39.0,
@@ -72,7 +72,7 @@ func TestExecute(t *testing.T) {
 			input: []input{
 				{
 					distance: 10.0,
-					dateTime: time.Date(2023, 6, 18, 10, 0, 0, 0, time.UTC),
+					datetime: time.Date(2023, 6, 18, 10, 0, 0, 0, time.UTC),
 				},
 			},
 			expectedFare: 29.0,
@@ -82,7 +82,7 @@ func TestExecute(t *testing.T) {
 			input: []input{
 				{
 					distance: 10.0,
-					dateTime: time.Date(2023, 6, 18, 23, 0, 0, 0, time.UTC),
+					datetime: time.Date(2023, 6, 18, 23, 0, 0, 0, time.UTC),
 				},
 			},
 			expectedFare: 50.0,
@@ -92,7 +92,7 @@ func TestExecute(t *testing.T) {
 			input: []input{
 				{
 					distance: -10.0,
-					dateTime: time.Date(2023, 6, 18, 10, 0, 0, 0, time.UTC),
+					datetime: time.Date(2023, 6, 18, 10, 0, 0, 0, time.UTC),
 				},
 			},
 			expectedErr: "invalid distance",
@@ -102,7 +102,7 @@ func TestExecute(t *testing.T) {
 			input: []input{
 				{
 					distance: 10.0,
-					dateTime: time.Date(1, 1, 1, 0, 0, 0, 0, time.UTC),
+					datetime: time.Date(1, 1, 1, 0, 0, 0, 0, time.UTC),
 				},
 			},
 			expectedErr: "invalid date",
@@ -111,12 +111,15 @@ func TestExecute(t *testing.T) {
 
 	for _, tt := range testTable {
 		t.Run(tt.name, func(t *testing.T) {
-			segments := []handleerrorsrefactoring.Segment{}
+			ride := objectorientedprogramming.NewRide()
 			for _, i := range tt.input {
-				segment := handleerrorsrefactoring.Segment{i.distance, i.dateTime}
-				segments = append(segments, segment)
+				err := ride.AddSegment(i.distance, i.datetime)
+				if err != nil {
+					assert.EqualError(t, err, tt.expectedErr)
+					t.SkipNow()
+				}
 			}
-			fare, err := handleerrorsrefactoring.CalculateRide(segments)
+			fare, err := ride.CalculateFare()
 			if err != nil {
 				assert.EqualError(t, err, tt.expectedErr)
 			}

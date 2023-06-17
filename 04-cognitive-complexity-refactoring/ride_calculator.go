@@ -10,6 +10,8 @@ const (
 	SUNDAY_FARE           = 2.9
 	OVERNIGHT_FARE        = 3.9
 	OVERNIGHT_SUNDAY_FARE = 5
+	OVERNIGHT_START       = 22
+	OVERNIGHT_END         = 6
 )
 
 type Segment struct {
@@ -56,7 +58,7 @@ func isValidDateTime(dateTime time.Time) bool {
 }
 
 func isOvernight(dateTime time.Time) bool {
-	return dateTime.Hour() >= 22 || dateTime.Hour() <= 6
+	return dateTime.Hour() >= OVERNIGHT_START || dateTime.Hour() <= OVERNIGHT_END
 }
 
 func isSunday(dateTime time.Time) bool {

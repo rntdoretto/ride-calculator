@@ -10,6 +10,8 @@ const (
 	SUNDAY_FARE           = 2.9
 	OVERNIGHT_FARE        = 3.9
 	OVERNIGHT_SUNDAY_FARE = 5
+	OVERNIGHT_START       = 22
+	OVERNIGHT_END         = 6
 )
 
 type Segment struct {
@@ -23,7 +25,7 @@ func CalculateRide(segments []Segment) float64 {
 		if segment.Distance > 0 {
 			if !segment.DateTime.IsZero() {
 				// overnight
-				if segment.DateTime.Hour() >= 22 || segment.DateTime.Hour() <= 6 {
+				if segment.DateTime.Hour() >= OVERNIGHT_START || segment.DateTime.Hour() <= OVERNIGHT_END {
 					// not sunday
 					if segment.DateTime.Weekday() != time.Sunday {
 						fare = fare + segment.Distance*OVERNIGHT_FARE

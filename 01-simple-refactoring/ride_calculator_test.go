@@ -81,7 +81,7 @@ func TestExecute(t *testing.T) {
 			expected: 50.0,
 		},
 		{
-			name: "Should return -1 if distanceance is invalid",
+			name: "Should return -1 if distance is invalid",
 			input: []map[string]any{
 				{
 					"distance": -10.0,
