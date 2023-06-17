@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// calculate ride
 func Calc(movArray []map[string]any) float64 {
 	var result float64
 	for _, mov := range movArray {
