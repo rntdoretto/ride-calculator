@@ -1,4 +1,4 @@
-package structsrefactoring
+package methodsrefactoring
 
 import (
 	"time"
@@ -20,20 +20,16 @@ type Segment struct {
 func CalculateRide(segments []Segment) float64 {
 	var fare float64
 	for _, segment := range segments {
-		if segment.Distance > 0 {
-			if !segment.DateTime.IsZero() {
-				// overnight
-				if segment.DateTime.Hour() >= 22 || segment.DateTime.Hour() <= 6 {
-					// not sunday
-					if segment.DateTime.Weekday() != time.Sunday {
+		if isValidDistance(segment.Distance) {
+			if isValidDateTime(segment.DateTime) {
+				if isOvernight(segment.DateTime) {
+					if !isSunday(segment.DateTime) {
 						fare = fare + segment.Distance*OVERNIGHT_FARE
-						// sunday
 					} else {
 						fare = fare + segment.Distance*OVERNIGHT_SUNDAY_FARE
 					}
 				} else {
-					// sunday
-					if segment.DateTime.Weekday() == time.Sunday {
+					if isSunday(segment.DateTime) {
 						fare = fare + segment.Distance*SUNDAY_FARE
 					} else {
 						fare = fare + segment.Distance*NORMAL_FARE
@@ -51,4 +47,20 @@ func CalculateRide(segments []Segment) float64 {
 	} else {
 		return fare
 	}
+}
+
+func isValidDistance(distance float64) bool {
+	return distance > 0
+}
+
+func isValidDateTime(dateTime time.Time) bool {
+	return !dateTime.IsZero()
+}
+
+func isOvernight(dateTime time.Time) bool {
+	return dateTime.Hour() >= 22 || dateTime.Hour() <= 6
+}
+
+func isSunday(dateTime time.Time) bool {
+	return dateTime.Weekday() == time.Sunday
 }
