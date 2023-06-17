@@ -24,12 +24,14 @@ Código morto
 
 * apagar código comentado
 
-## 02 - Methods Refactoring
+## 02 - Structs Refactoring
 
 Longa lista de parâmetros ou parâmetros abertos
 
 * introduzindo objetos
 * introduzindo objetos parâmetro
+
+## 03 - Methods Refactoring
 
 Comentários
 
