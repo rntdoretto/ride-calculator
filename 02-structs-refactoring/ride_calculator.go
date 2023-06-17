@@ -46,7 +46,7 @@ func CalculateRide(segments []Segment) float64 {
 			return -1
 		}
 	}
-	if fare < 10 {
+	if fare < MIN_FARE {
 		return MIN_FARE
 	} else {
 		return fare

@@ -1,4 +1,4 @@
-package methodsrefactoring
+package cognitivecomplexityrefactoring
 
 import (
 	"time"
@@ -20,27 +20,25 @@ type Segment struct {
 func CalculateRide(segments []Segment) float64 {
 	var fare float64
 	for _, segment := range segments {
-		if isValidDistance(segment.Distance) {
-			if isValidDateTime(segment.DateTime) {
-				if isOvernight(segment.DateTime) {
-					if !isSunday(segment.DateTime) {
-						fare = fare + segment.Distance*OVERNIGHT_FARE
-					} else {
-						fare = fare + segment.Distance*OVERNIGHT_SUNDAY_FARE
-					}
-				} else {
-					if isSunday(segment.DateTime) {
-						fare = fare + segment.Distance*SUNDAY_FARE
-					} else {
-						fare = fare + segment.Distance*NORMAL_FARE
-					}
-				}
-			} else {
-				return -2
-			}
-		} else {
+		if !isValidDistance(segment.Distance) {
 			return -1
 		}
+		if !isValidDateTime(segment.DateTime) {
+			return -2
+		}
+		if isOvernight(segment.DateTime) && !isSunday(segment.DateTime) {
+			fare = fare + segment.Distance*OVERNIGHT_FARE
+		}
+		if isOvernight(segment.DateTime) && isSunday(segment.DateTime) {
+			fare = fare + segment.Distance*OVERNIGHT_SUNDAY_FARE
+		}
+		if !isOvernight(segment.DateTime) && isSunday(segment.DateTime) {
+			fare = fare + segment.Distance*SUNDAY_FARE
+		}
+		if !isOvernight(segment.DateTime) && !isSunday(segment.DateTime) {
+			fare = fare + segment.Distance*NORMAL_FARE
+		}
+
 	}
 	if fare < MIN_FARE {
 		return MIN_FARE

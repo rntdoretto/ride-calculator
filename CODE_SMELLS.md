@@ -38,12 +38,12 @@ Comentários
 * criando variáveis explicativas
 * extraindo métodos explicativos
 
-## if/else complexo
+## 04 - Cognitive Complexity Refactoring
 
 * introdução de cláusula guarda
 * consolidar comandos condicionais
 
-## Tratamento de erros inadequado
+## 05 - Handle Errors Refactoring
 
 * utilizar um tratamento de erros adequado
 
