@@ -40,7 +40,6 @@ func CalculateRide(segments []Segment) float64 {
 		if !isOvernight(segment.DateTime) && !isSunday(segment.DateTime) {
 			fare = fare + segment.Distance*NORMAL_FARE
 		}
-
 	}
 	if fare < MIN_FARE {
 		return MIN_FARE

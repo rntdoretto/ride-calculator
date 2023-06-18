@@ -32,7 +32,6 @@ func (r *Ride) AddSegment(distance float64, dateTime time.Time) error {
 func (r *Ride) CalculateFare() (float64, error) {
 	var fare float64
 	for _, segment := range r.segments {
-
 		if segment.isOvernight() && !segment.isSunday() {
 			fare = fare + segment.distance*OVERNIGHT_FARE
 		}
@@ -45,7 +44,6 @@ func (r *Ride) CalculateFare() (float64, error) {
 		if !segment.isOvernight() && !segment.isSunday() {
 			fare = fare + segment.distance*NORMAL_FARE
 		}
-
 	}
 	if fare < MIN_FARE {
 		return MIN_FARE, nil

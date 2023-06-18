@@ -46,6 +46,25 @@ Comentários
 
 * utilizar um tratamento de erros adequado
 
-## 06 - Object Oriented Programming 
+## 06 - Object Oriented Programming
 
 * introduzindo objetos
+
+## 07 - SOLID & Design Patterns (Strategy)
+
+S - Single Responsability
+    Uma classe/arquivo deve ter um, e somente um, motivo para mudar
+O - Open / Closed
+    Objetos ou entidades devem estar abertos para extensão, mas fechados para modificaçã
+L - Liskov Substitution
+    Uma classe derivada deve ser substituível por sua classe base
+I - Interface Segregation
+    Uma classe não deve ser forçada a implementar interfaces e métodos que não irão utilizar
+D - Dependency Inversion
+    Dependa de abstrações e não de implementações
+
+Design Patterns
+    Uma forma conhecida e comum de distribuição de responsabilidades entre classes
+
+Strategy: Ter comportamentos diferentes para o mesmo contrato
+Factory (simple): Criar instâncias com base em algum critério
