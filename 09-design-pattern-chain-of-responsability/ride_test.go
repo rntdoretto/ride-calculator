@@ -1,10 +1,10 @@
-package solidstrategyfactory_test
+package designpatternchainofresponsability_test
 
 import (
 	"testing"
 	"time"
 
-	solidstrategyfactory "github.com/rntdoretto/ride-calculator/07-solid-strategy-factory"
+	designpatternchainofresponsability "github.com/rntdoretto/ride-calculator/09-design-pattern-chain-of-responsability"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -111,7 +111,11 @@ func TestExecute(t *testing.T) {
 
 	for _, tt := range testTable {
 		t.Run(tt.name, func(t *testing.T) {
-			ride := solidstrategyfactory.NewRide()
+			overnightSundayFareCalculatorHandler := designpatternchainofresponsability.NewOvernightSundayFareCalculatorHandler()
+			sundayFareCalculatorHandler := designpatternchainofresponsability.NewSundayFareCalculatorHandlerWithNext(overnightSundayFareCalculatorHandler)
+			overnightFareCalculatorHandler := designpatternchainofresponsability.NewOvernightFareCalculatorHandlerWithNext(sundayFareCalculatorHandler)
+			normalFareCalculatorHandler := designpatternchainofresponsability.NewNormalFareCalculatorHandlerWithNext(overnightFareCalculatorHandler)
+			ride := designpatternchainofresponsability.NewRide(normalFareCalculatorHandler)
 			for _, i := range tt.input {
 				err := ride.AddSegment(i.distance, i.datetime)
 				if err != nil {

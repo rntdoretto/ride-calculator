@@ -1,4 +1,4 @@
-package solidstrategyfactory
+package designpatternchainofresponsability
 
 import (
 	"fmt"

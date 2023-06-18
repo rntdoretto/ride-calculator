@@ -50,7 +50,28 @@ Comentários
 
 * introduzindo objetos
 
-## 07 - SOLID & Design Patterns (Strategy)
+## 07 - Design Pattern Strategy
+
+Design Patterns
+    Uma forma conhecida e comum de distribuição de responsabilidades entre classes
+
+Strategy: Ter comportamentos diferentes para o mesmo contrato
+
+## 08 - Design Pattern Strategy + Factory
+
+Design Patterns
+    Uma forma conhecida e comum de distribuição de responsabilidades entre classes
+
+Factory (simple): Criar instâncias com base em algum critério
+
+## 09 - Design Pattern Chain Of Responsability
+
+Design Patterns
+    Uma forma conhecida e comum de distribuição de responsabilidades entre classes
+
+Chain of Responsability: Encadeamento de comportamento, permitindo que um dos elos (classes encadeadas) DECIDAM se tratam ou não, e se não tratarem, passam para o próximo
+
+## SOLID
 
 S - Single Responsability
     Uma classe/arquivo deve ter um, e somente um, motivo para mudar
@@ -62,9 +83,3 @@ I - Interface Segregation
     Uma classe não deve ser forçada a implementar interfaces e métodos que não irão utilizar
 D - Dependency Inversion
     Dependa de abstrações e não de implementações
-
-Design Patterns
-    Uma forma conhecida e comum de distribuição de responsabilidades entre classes
-
-Strategy: Ter comportamentos diferentes para o mesmo contrato
-Factory (simple): Criar instâncias com base em algum critério

@@ -1,4 +1,4 @@
-package solidstrategyfactory
+package designpatternfactory
 
 type OvernightFareCalculator struct {
 	fare float64
@@ -10,6 +10,6 @@ func NewOvernightFareCalculator() *OvernightFareCalculator {
 	return &OvernightFareCalculator{fare: 3.9}
 }
 
-func (n *OvernightFareCalculator) calculate(segment Segment) float64 {
+func (n *OvernightFareCalculator) Calculate(segment Segment) float64 {
 	return segment.distance * n.fare
 }

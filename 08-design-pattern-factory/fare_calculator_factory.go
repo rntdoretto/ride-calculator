@@ -1,4 +1,4 @@
-package solidstrategyfactory
+package designpatternfactory
 
 func CreateFareCalculator(segment Segment) FareCalculator {
 	if segment.isOvernight() && !segment.isSunday() {
